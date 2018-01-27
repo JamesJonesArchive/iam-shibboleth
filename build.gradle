@@ -40,9 +40,15 @@ task hello {
         println 'Hello, World'
     }
 }
-task clone {
+task clone(type: GradleBuild) {
+  tasks = ['deleteClone','retrieveClone']
+}
+task retrieveClone {
   description = 'Pushes current branch\'s committed changes to origin repo.'
   doLast {
-    grgit.clone(dir: 'java-identity-provider', uri:'git://git.shibboleth.net/java-identity-provider.git', bare: true, refToCheckout: 'master')
+    grgit.clone(dir: 'java-identity-provider', uri:'git://git.shibboleth.net/java-identity-provider.git', bare: false, refToCheckout: 'master')
   }
+}
+task deleteClone(type: Delete) {
+  delete 'java-identity-provider'
 }
