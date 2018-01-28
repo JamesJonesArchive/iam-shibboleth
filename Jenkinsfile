@@ -13,7 +13,7 @@ node('master') {
     sh('#!/bin/sh -e\n' + "chmod 755 gradlew")
     dir('java-identity-provider') {
       // git url: 'git://git.shibboleth.net/java-identity-provider.git', branch: 'master'
-      git url: 'git@git.shibboleth.net:java-identity-provider.git', branch: 'master'
+      git url: 'git@git.shibboleth.net/java-identity-provider.git', branch: 'master'
       sh './bin/install.sh'
     } 
   }
