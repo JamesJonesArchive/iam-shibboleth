@@ -11,7 +11,9 @@ node('master') {
 
   stage('Clone java-identity-provider') {
     sh('#!/bin/sh -e\n' + "chmod 755 gradlew")
-    sh('#!/bin/sh -e\n' + "./gradlew clone")
+    dir('java-identity-provider') {
+      git url: 'git://git.shibboleth.net/java-identity-provider.git', branch: 'master'
+      sh ' ./bin/install.sh'
+    } 
   }
-  // java-identity-provider
 }
