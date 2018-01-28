@@ -2,15 +2,18 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+          url 'https://build.shibboleth.net/nexus/content/groups/public'
+        }
     }
 }
 
 plugins {
+  id 'java'
+  id 'groovy'
   id 'org.ajoberstar.grgit' version '2.1.0'
 }
 
-apply plugin: 'java'
-apply plugin: 'groovy'
 
 
 
@@ -21,6 +24,9 @@ repositories {
     jcenter()
     mavenCentral()
     mavenLocal()
+    maven {
+      url 'https://build.shibboleth.net/nexus/content/groups/public'
+    }
 }
 
 sourceCompatibility = 1.8
@@ -29,6 +35,9 @@ targetCompatibility = 1.8
 dependencies {
     // Use the latest Groovy version for building this library
     compile 'org.codehaus.groovy:groovy-all:2.4.12'
+    compile 'net.shibboleth.idp:idp-attribute-resolver-api:${idp.version}'
+    compile 'org.opensaml:opensaml-saml-api:${opensaml.version}'
+    compile 'net.shibboleth.utilities:java-support:${java-support.version}'
     // compile 'org.ajoberstar:grgit:2.1.0'
 }
 
@@ -41,7 +50,7 @@ task hello {
     }
 }
 task clone(type: GradleBuild) {
-  tasks = ['deleteClone','retrieveClone']
+  tasks = ['build','deleteClone','retrieveClone']
 }
 task retrieveClone {
   description = 'Pushes current branch\'s committed changes to origin repo.'
