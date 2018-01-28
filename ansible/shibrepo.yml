@@ -1,7 +1,8 @@
 ---
 - name: Add repository
   yum_repository:
-    name: shibboleth
+    name: security_shibboleth
+    file: shibboleth
     description: Shibboleth (CentOS_7)
     baseurl: http://download.opensuse.org/repositories/security:/shibboleth/CentOS_7/
     repo_gpgcheck: true
